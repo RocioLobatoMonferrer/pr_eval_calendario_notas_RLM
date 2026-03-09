@@ -1,0 +1,48 @@
+/**
+TODO: Cambiar entre off y on
+*/
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  margin: 20px;
+  max-width: 900px;
+  text-align: center;
+  background-color: aliceblue;
+}
+
+table {
+    margin: auto;
+    border: 2px solid rgb(119, 235, 215);
+}
+
+th {
+    background-color: rgb(196, 243, 247);
+    padding: 10px 20px;
+}
+
+th, a:visited, a:hover, a, a:active {
+    color: rgb(12, 63, 70);
+    text-decoration: none;
+}
+
+th.completada {
+  color: rgb(15, 166, 185);;
+}
+
+button {
+  padding: 10px 15px;
+  cursor: pointer;
+  align-items: center;
+  margin-left: 30px;
+  background-color: azure;
+  border-color: rgb(197, 226, 226);
+  border-radius: 10px;
+}
+
+#msg {
+  margin-top: 10px;
+  min-height: 20px;
+  color: #b00020;
+}
+
+

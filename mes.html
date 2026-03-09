@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calendario de Notas</title>
+  <link rel="stylesheet" href="styles.css" />
+   <script src="app_mes.js" defer></script>
+</head>
+
+<body>
+    <header class="cabecera">
+        <h1></h1>
+    </header>
+    <main>
+
+        <section id="entrada">
+            <label>
+                Título
+                <input id="inpTitulo" type="text" required minlength="2" />
+            </label>
+            <label>
+                Descripción
+                <input id="inpDescripcion" type="text" required minlength="2" />
+            </label>
+        </section>
+            
+        <section id="opciones">
+            <button type="button" id="btnAgregar">Agregar</button>
+            <button type="button" id="btnRegresar"><a href="index.html">Volver al calendario</a></button>
+        </section>
+
+         <section id="secListaNotas">
+            <ol id="listaNotas"></ol>
+        </section>
+
+        <section>
+            <div id="msg"></div>
+        </section>
+    </main>
+</body>
+
+
+
