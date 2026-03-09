@@ -25,7 +25,7 @@ th, a:visited, a:hover, a, a:active {
     text-decoration: none;
 }
 
-th.completada {
+th.completada, th.completada a, th.completada a:visited, th.completada a:hover, th.completada a:active{
   color: rgb(15, 166, 185);;
 }
 

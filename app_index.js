@@ -1,24 +1,19 @@
 const pintarNotas = document.querySelector("#pintarNotas");
 const btnListar = document.querySelector("#btnListar");
 const btnLimpiar = document.querySelector("#btnLimpiar");
-const clavesMeses = ["nota_1", "nota_2", "nota_3", "nota_4", "nota_5", "nota_6", 
-    "nota_7", "nota_8", "nota_9", "nota_10", "nota_11", "nota_12"];
-const meses = document.querySelectorAll(".mes"); // contador
-
-let notas = [];
+const meses = document.querySelectorAll(".mes"); 
+const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 function init() {
-    const params = new URLSearchParams(window.location.search);
-    const mes = Number(params.get("mes"));
-    notas = cargarNotas();
     contarNotas();
 
     btnListar.addEventListener("click", () => {
-
+        listar();
     });
 
     btnLimpiar.addEventListener("click", () => {
-
+        limpiar();
     });
 
 }
@@ -26,33 +21,57 @@ function init() {
 init();
 
 function contarNotas() {
-    for(let i = 0; i < notas.length; i++) {
-        let contador = notas[i].length;
-        meses[i].textContent = contador;
+    for(let i = 0; i < meses.length; i++) {
+        const contador = cargarNotas(i + 1); // Devuelve un array con todas las notas 
+        meses[i].textContent = contador.length; // Necesario para obtener el número como tal
+
+        const th = meses[i].closest("th");
+
+        if(contador.length > 0) {
+            th.classList.add("completada");
+        } else {
+             th.classList.remove("completada");
+        }
     }
 }
 
-function cargarNotas() {
-    let allNotas = [];
-    for(let i = 0; i < clavesMeses.length; i++) {
-        const clave = clavesMeses[i];
-        const raw = localStorage.getItem(clave);
-    
-        try {
-            const notas = raw ? JSON.parse(raw) : []; //JSON a Array
-            allNotas.push(Array.isArray(notas) ? notas : []);
-        } catch (error) {
-            alert.error("JSON inválido:", error);
-            allNotas.push([]);
-        }
-    }
-    return allNotas;
+function cargarNotas(mes) {
+  const key = "nota" + mes;  
+  const raw = localStorage.getItem(key);
+
+  if (!raw) return [];
+
+  try {
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    alert("JSON inválido:", error);
+    return [];
+  }
 }
 
 function limpiar() {
-
+    if(!confirm("¿Estás seguro de borrar todas las notas?")) {
+        return false;
+    }
+    pintarNotas.textContent = "";
+    for(let i = 0; i < meses.length; i++) {
+        localStorage.removeItem("nota" + (i + 1));
+        meses[i].textContent = 0;
+    }
+    contarNotas();
 }
 
-function listar() {
-    
+function listar() { // FOR: Del array con todas las notas de los meses, a solo un mes con todas su notas
+    pintarNotas.textContent = "";
+    for(let  i = 0; i < meses.length; i++) {
+        const notaMes = cargarNotas(i + 1);
+        for(let j = 0; j < notaMes.length; j++) {
+            const li = document.createElement("li");
+            li.textContent = `Mes: ${nombresMeses[i]} - ${notaMes[j].titulo}: ${notaMes[j].descripcion}`;
+            pintarNotas.appendChild(li);
+        }
+
+    }
+    contarNotas();
 }

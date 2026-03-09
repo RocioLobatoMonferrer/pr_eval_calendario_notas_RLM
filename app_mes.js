@@ -25,12 +25,13 @@ let notasMeses;
 // notasMeses sirve para que separe cada mes correspondientemente sus notas
 
 function init() {
-    render();
     const params = new URLSearchParams(window.location.search);
     const mes = Number(params.get("mes"));
     tituloHead.textContent = "Notas de " + nombresMeses[mes - 1];
     notasMeses = "nota" + mes;
     notas = cargarNotas();
+
+    render();
 
     btnAgregar.addEventListener("click", () => {
         if(!validad()) {
@@ -134,7 +135,7 @@ function cargarNotas() {
     const data = JSON.parse(raw);
     return Array.isArray(data) ? data : [];
   } catch (error) {
-    alert.error("JSON inválido:", error);
+    alert("JSON inválido:", error);
     return [];
   }
 }

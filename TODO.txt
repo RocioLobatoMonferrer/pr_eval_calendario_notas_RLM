@@ -1,7 +1,7 @@
-1. Estilo of y on
+1. Estilo of y on X 
 2. Querystring
-3. Acciones globales del Index
-4. Autalizar contadores
+3. Acciones globales del Index x
+4. Acutalizar contadores x
 
 5. Validación X 
 6. Errores en web X
