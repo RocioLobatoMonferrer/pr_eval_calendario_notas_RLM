@@ -11,7 +11,7 @@ En la página principal se pueden listar todas las notas o eliminarlas.
 
 Con respecto a la creación de la página, en primer lugar, en el JavaScript de la página principal llamamos a la función init(), que es la encargada de actualizar el contador de notas gracias a la función cargarNotas(), la cual obtiene los datos desde localStorage.
 
-```js
+```javaScript
 function init() {
     contarNotas();
 
@@ -30,7 +30,7 @@ Después se encuentran las funciones de los botones:
 
 - Listar, que muestra todas las notas que existan.
 
-```js
+```javaScript
 function listar() {
     pintarNotas.textContent = "";
     let ok = false;
@@ -54,7 +54,7 @@ function listar() {
 
 - Limpiar, que, a diferencia de Listar, borra todas las notas existentes.
 
-```js
+```javaScript
 function limpiar() {
     let ok = false;
     if(!confirm("¿Estás seguro de borrar todas las notas?")) {
@@ -78,7 +78,7 @@ function limpiar() {
 
 En cuanto a la página de cada mes, tenemos otra función init() encargada de colocar el nombre correspondiente al mes, por ejemplo, Notas de Enero.
 
-```js
+```javaScript
 function init() {
     const params = new URLSearchParams(window.location.search);
     const mes = Number(params.get("mes"));
@@ -100,7 +100,7 @@ function init() {
 
 Posteriormente, se cargan las notas existentes utilizando nuevamente localStorage. 
 
-```js
+```javaScript
 function cargarNotas() {
   const raw = localStorage.getItem(notasMeses);
 
@@ -118,7 +118,7 @@ function cargarNotas() {
 
 Después encontramos el botón Agregar nota, que requiere una validación antes de enviarse.
 
-```js
+```javaScript
 function validad() {
     if(!inpTitulo.checkValidity()) {
         mostrarMensaje("Debes colocar un título de mínimo tres caracteres");
@@ -134,7 +134,7 @@ function validad() {
 
 Una vez validada, la nota se inserta y se muestra en pantalla.
 
-```js
+```javaScript
 function pintarListaNotas() {
     listaNotas.textContent = "";
     for(let i = 0; i < notas.length; i++) {
@@ -167,7 +167,7 @@ Por último, cada nota tiene dos botones:
 
 - Borrar, que elimina esa nota concreta.
 
-```js
+```javaScript
 function borrarNota(indice) {
      if(!confirm("¿Estás seguro de borrar esta nota?")) {
         return false;
@@ -180,7 +180,7 @@ function borrarNota(indice) {
   
 - Editar, que coloca en los campos del formulario los datos de esa nota para poder modificarlos. Sin embargo, si se vuelve atrás durante el proceso de edición, se perderá la nota, ya que técnicamente se elimina cada vez que se comienza a editar.
 
-```js
+```javaScript
 function editarNota(indice) {
     const editNota = notas[indice];
     inpTitulo.value = editNota.titulo;
@@ -212,11 +212,16 @@ Una vez dentro, introducimos los campos que deseemos.
 Debemos tener en cuenta que cada campo no puede estar vacío y debe contener al menos 3 caracteres, ya que no tendría mucho sentido crear notas de uno o dos caracteres.
 
 ![BotNotMes](img/6.png)
+
+
 ![BotNotMes2](img/7.png)
 
 Si deseamos editar una nota, pulsamos el botón Editar y realizamos las modificaciones necesarias.
 
 ![EditNota1](img/9.png)
+
+
+
 ![EditNota2](img/10.png)
 
 También podemos borrar la nota si así lo deseamos pulsando el botón Borrar y te preguntará si estas de acuerdo con borrarla
@@ -231,5 +236,8 @@ Al regresar al calendario, veremos que el mes de Enero aparece con un color más
 Debemos tener en cuenta que, si pulsamos Limpiar, aparecerá un aviso preguntándonos si realmente deseamos borrar todas las notas almacenadas.
 
 ![BorrarList1](img/12.png)
+
+
+
 ![BorrarList2](img/13.png)
 
