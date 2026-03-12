@@ -76,10 +76,19 @@ function validad() {
         mostrarMensaje("Debes colocar un título de mínimo tres caracteres");
         return false;
     }
+    if(inpTitulo.value.trim() == "") {
+        mostrarMensaje("No se admiten campos vacíos");
+        return false;
+    }
     if(!inpDescripcion.checkValidity()) {
         mostrarMensaje("Debes colocar una descripción de mínimo tres caracteres");
         return false;
     }
+    if(inpDescripcion.value.trim() == "") {
+        mostrarMensaje("No se admiten campos vacíos");
+        return false;
+    }
+
     return true;
 }
 
