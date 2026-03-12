@@ -1,18 +1,47 @@
-/**
-TODO: Cambiar entre off y on
-*/
+/* ===== FUENTES ===== */
+
+@font-face {
+  font-family: "h1";
+  src: url(fonts/FleurDeLeah-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: "text";
+  src: url(fonts/BonheurRoyale-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: "button";
+  src: url(fonts/Birthstone-Regular.ttf) format('truetype');
+}
+
+/* ===== MAIN ===== */
+
+h1 {
+  font-family: "h1";
+  color: rgb(73, 143, 131);
+}
+
+h1:hover {
+  transform: translateY(-2px);
+}
 
 body {
-  font-family: system-ui, Arial, sans-serif;
-  margin: 20px;
+  font-family: "text", system-ui, Arial, sans-serif;
+  font-size: 30px;
+  margin: 20px auto;
   max-width: 900px;
   text-align: center;
   background-color: aliceblue;
 }
 
+/* ===== TABLA ===== */
+
 table {
     margin: auto;
-    border: 2px solid rgb(119, 235, 215);
+    border: 5px solid rgb(119, 235, 215);
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px 0px #5F8F86, 10px 10px 0px 0px #7FAEA4, 15px 15px 0px 0px #A8C9C1, 20px 20px 0px 0px #CFE2DE, 25px 25px 0px 0px #E6F1EE, 5px 5px 8px -8px rgba(0,0,0,0);
 }
 
 th {
@@ -25,24 +54,43 @@ th, a:visited, a:hover, a, a:active {
     text-decoration: none;
 }
 
+th:hover {
+  transform: translateY(-2px);
+}
+
 th.completada, th.completada a, th.completada a:visited, th.completada a:hover, th.completada a:active{
   color: rgb(15, 166, 185);;
 }
 
-button {
-  padding: 10px 15px;
+input {
+  box-shadow: 5px 7px 11px 0px rgba(157, 159, 160, 0.77); 
+  border-radius: 5px;
+}
+
+/* ===== BOTONES ===== */
+
+button, button a:visited {
+  text-decoration: none;
+  font-family: "button";
+  font-size: 25px;
+  padding: 5px 20px;
   cursor: pointer;
   align-items: center;
-  margin-left: 30px;
-  background-color: azure;
-  border-color: rgb(197, 226, 226);
+  margin: 10px;
+  background-color: rgb(225, 241, 241);
+  border-color: rgb(173, 201, 201);
   border-radius: 10px;
+  box-shadow: 5px 7px 11px 0px rgba(10, 42, 61, 0.77); 
 }
+
+button:hover{
+  transform: translateY(-2px);
+}
+
+/* ===== MENSJAE ERROR ===== */
 
 #msg {
   margin-top: 10px;
   min-height: 20px;
   color: #b00020;
 }
-
-

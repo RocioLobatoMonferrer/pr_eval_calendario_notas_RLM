@@ -1,23 +1,28 @@
-/**
- * DOM
- */
+/* ==========================================================
+   1) REFERENCIAS AL DOM 
+   ========================================================== */
+
 const tituloHead = document.querySelector("h1");
 const listaNotas = document.querySelector("#listaNotas");
 const inpTitulo = document.querySelector("#inpTitulo");
 const inpDescripcion = document.querySelector("#inpDescripcion");
 const btnAgregar= document.querySelector("#btnAgregar");
 const msg = document.querySelector("#msg");
-const timeOut = 2000;
 
-/**
- * Lista de Meses
- */
+/* ==========================================================
+   2) VARIABLES GLOBALES 
+   ========================================================== */
+
 const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
     "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
 let notas = [];
 let notasMeses;
+const timeOut = 2000;
 
+
+/* ==========================================================
+   3) INICIALIZACIÓN (eventos) 
+   ========================================================== */
 
 // nombreMeses empieza en cero, mientras que mes empieza en 1 por HTML, 
 // por eso, para que coga el array le -1
@@ -44,16 +49,63 @@ function init() {
 
 init();
 
+/* ==========================================================
+   4) CARGA DE DATOS  
+   ========================================================== */
+
+function cargarNotas() {
+  const raw = localStorage.getItem(notasMeses);
+
+  if (!raw) return [];
+
+  try {
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    alert("JSON inválido:", error);
+    return [];
+  }
+}
+
+/* ==========================================================
+   5) VALIDACIONES  
+   ========================================================== */
+
 function validad() {
     if(!inpTitulo.checkValidity()) {
-        mostrarMensaje("Debes colocar un título de mínimo dos caracteres");
+        mostrarMensaje("Debes colocar un título de mínimo tres caracteres");
         return false;
     }
     if(!inpDescripcion.checkValidity()) {
-        mostrarMensaje("Debes colocar una descripción de mínimo dos caracteres");
+        mostrarMensaje("Debes colocar una descripción de mínimo tres caracteres");
         return false;
     }
     return true;
+}
+
+/* ==========================================================
+   6) CREACIÓN Y PINTADO DE NOTAS  
+   ========================================================== */
+
+function crearNota() {
+    const nota = {
+        titulo: inpTitulo.value,
+        descripcion: inpDescripcion.value
+    };
+    return nota;
+}
+
+function insertarNota() {
+    const nota = crearNota();
+    if(!nota) {
+        return null;
+    } else {
+        notas.push(nota);
+        localStorage.setItem(notasMeses, JSON.stringify(notas));
+        inpTitulo.value = "";
+        inpDescripcion.value = "";
+        pintarListaNotas();
+    }
 }
 
 function pintarListaNotas() {
@@ -81,6 +133,10 @@ function pintarListaNotas() {
     }
 }
 
+/* ==========================================================
+   7) BOTONES DE CADA NOTA  
+   ========================================================== */
+
 function borrarNota(indice) {
      if(!confirm("¿Estás seguro de borrar esta nota?")) {
         return false;
@@ -98,46 +154,15 @@ function editarNota(indice) {
     notas.splice(indice, 1);
     localStorage.setItem(notasMeses, JSON.stringify(notas));
 
-    pintarListaNotas();
+    render();
 }
+
+/* ==========================================================
+   8) PINTAR MENSAJES  
+   ========================================================== */
 
 function render() {
     pintarListaNotas();
-}
-
-function crearNota() {
-    const nota = {
-        titulo: inpTitulo.value,
-        descripcion: inpDescripcion.value
-    };
-    return nota;
-}
-
-function insertarNota() {
-    const nota = crearNota();
-    if(!nota) {
-        return null;
-    } else {
-        notas.push(nota);
-        localStorage.setItem(notasMeses, JSON.stringify(notas));
-        inpTitulo.value = "";
-        inpDescripcion.value = "";
-        pintarListaNotas();
-    }
-}
-
-function cargarNotas() {
-  const raw = localStorage.getItem(notasMeses);
-
-  if (!raw) return [];
-
-  try {
-    const data = JSON.parse(raw);
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    alert("JSON inválido:", error);
-    return [];
-  }
 }
 
 function mostrarMensaje(texto) {
